@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaSmileBeam } from 'react-icons/fa';
 
 const Services = () => {
     return (
@@ -23,11 +24,7 @@ const Services = () => {
                 {/* Cosmetic Dentistry Service */}
                 <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105">
                     <div className="text-center mb-6">
-                        <img
-                            src="https://img.icons8.com/ios/452/smile.png"
-                            alt="Cosmetic Dentistry Icon"
-                            className="w-16 h-16 mx-auto mb-4"
-                        />
+                        <FaSmileBeam className="w-16 h-16 mx-auto mb-4 text-gray-800" /> {/* FontAwesome Icon */}
                         <h3 className="text-xl font-semibold text-gray-800">Cosmetic Dentistry</h3>
                     </div>
                     <p className="text-gray-600">Enhance your smile with procedures like teeth whitening, veneers, and more for a confident, radiant appearance.</p>
