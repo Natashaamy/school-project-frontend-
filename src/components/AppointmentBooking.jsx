@@ -10,6 +10,9 @@ const AppointmentBooking = () => {
         message: ''
     });
 
+    const [loading, setLoading] = useState(false); // Loading state
+    const [confirmationMessage, setConfirmationMessage] = useState(''); // Confirmation message
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -21,6 +24,9 @@ const AppointmentBooking = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setLoading(true); // Set loading to true when submitting
+        setConfirmationMessage(''); // Reset confirmation message on new submission
+
         // API request (you would replace the URL with your actual API endpoint)
         const response = await fetch('https://school-project-pg6q.onrender.com/api/bookings', {
             method: 'POST',
@@ -30,8 +36,10 @@ const AppointmentBooking = () => {
             body: JSON.stringify(formData),
         });
 
+        setLoading(false); // Set loading to false after submission
+
         if (response.ok) {
-            alert('Appointment successfully booked!');
+            setConfirmationMessage('Appointment successfully booked!');
             setFormData({
                 name: '',
                 email: '',
@@ -41,7 +49,7 @@ const AppointmentBooking = () => {
                 message: ''
             });
         } else {
-            alert('Something went wrong. Please try again.');
+            setConfirmationMessage('Something went wrong. Please try again.');
         }
     };
 
@@ -112,11 +120,19 @@ const AppointmentBooking = () => {
                             <button
                                 type="submit"
                                 className="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition w-full"
+                                disabled={loading} // Disable the button while loading
                             >
-                                Confirm Appointment
+                                {loading ? 'Booking...' : 'Confirm Appointment'}
                             </button>
                         </div>
                     </form>
+
+                    {/* Show confirmation message after submission */}
+                    {confirmationMessage && (
+                        <div className="mt-6 text-center text-lg font-semibold text-gray-800">
+                            {confirmationMessage}
+                        </div>
+                    )}
                 </div>
 
                 {/* Image Section (Right Side) */}
