@@ -13,6 +13,7 @@ const AppointmentBooking = () => {
     const [loading, setLoading] = useState(false); // Loading state
     const [confirmationMessage, setConfirmationMessage] = useState(''); // Confirmation message
 
+    // handleChange function to update form data
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -21,13 +22,15 @@ const AppointmentBooking = () => {
         }));
     };
 
+    // handleSubmit function to submit form data
     const handleSubmit = async (e) => {
+        // prevent realoding the page
         e.preventDefault();
 
         setLoading(true); // Set loading to true when submitting
         setConfirmationMessage(''); // Reset confirmation message on new submission
 
-        // API request (you would replace the URL with your actual API endpoint)
+        // API request (POST) to submit form data
         const response = await fetch('https://school-project-pg6q.onrender.com/api/bookings', {
             method: 'POST',
             headers: {
@@ -38,8 +41,10 @@ const AppointmentBooking = () => {
 
         setLoading(false); // Set loading to false after submission
 
+        // Check if the request was successful
         if (response.ok) {
             setConfirmationMessage('Appointment successfully booked!');
+            // Reset form data after successful submission
             setFormData({
                 name: '',
                 email: '',

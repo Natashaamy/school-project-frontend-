@@ -4,7 +4,7 @@ import { FaSmileBeam } from 'react-icons/fa';
 const Services = () => {
     return (
         <section id="services" className="bg-white py-16 px-6 sm:px-8 max-w-screen-xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-4">
                 Our Premium Dental Services
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
