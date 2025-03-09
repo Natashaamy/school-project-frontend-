@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:4000/api/auth", // Change to your backend URL
+    baseURL: "https://school-project-pg6q.onrender.com/api/auth",
     headers: { "Content-Type": "application/json" },
 });
 
