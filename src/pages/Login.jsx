@@ -1,14 +1,42 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import API from "../axiosInstance";
+
 export default function Login() {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const { data } = await API.post("/login", formData);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            toast.success("Login successful!");
+            navigate("/");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Invalid credentials");
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-blue-500 flex items-center justify-center p-4">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Login</h1>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
                             id="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
                             className="mt-1 block w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                             placeholder="Enter your email"
                         />
@@ -18,6 +46,9 @@ export default function Login() {
                         <input
                             type="password"
                             id="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
                             className="mt-1 block w-full px-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                             placeholder="Enter your password"
                         />
