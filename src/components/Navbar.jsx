@@ -33,7 +33,7 @@ const Navbar = () => {
                     <a href="#book" className="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition duration-200">Book Appointment</a>
 
                     {user?.role === "admin" && (
-                        <a href="/appointments" className="text-gray-800 hover:text-blue-500 transition-colors duration-200">Appointments</a>
+                        <a href="/bookings" className="text-gray-800 hover:text-blue-500 transition-colors duration-200">Appointments</a>
                     )}
 
                     {!user ? (
