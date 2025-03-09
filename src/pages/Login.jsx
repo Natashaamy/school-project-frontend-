@@ -6,6 +6,7 @@ import API from "../axiosInstance";
 export default function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -13,6 +14,8 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             const { data } = await API.post("/login", formData);
             localStorage.setItem("token", data.token);
@@ -21,6 +24,8 @@ export default function Login() {
             navigate("/");
         } catch (error) {
             toast.error(error.response?.data?.message || "Invalid credentials");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -55,9 +60,10 @@ export default function Login() {
                     </div>
                     <button
                         type="submit"
+                        disabled={loading}
                         className="w-full bg-blue-500 text-white py-2 rounded-full hover:bg-blue-600 transition duration-300"
                     >
-                        Login
+                        {loading ? "Loading..." : "Login"}
                     </button>
                 </form>
                 <p className="mt-6 text-center text-sm text-gray-600">
