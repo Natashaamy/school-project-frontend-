@@ -5,6 +5,7 @@ import API from "../axiosInstance";
 
 export default function SignUp() {
     const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -13,12 +14,15 @@ export default function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await API.post("/register", formData);
             toast.success("Account created successfully! Please login.");
             navigate("/login");
         } catch (error) {
             toast.error(error.response?.data?.message || "Something went wrong");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,9 +69,10 @@ export default function SignUp() {
                     </div>
                     <button
                         type="submit"
+                        disabled={loading}
                         className="w-full bg-blue-500 text-white py-2 rounded-full hover:bg-blue-600 transition duration-300"
                     >
-                        Sign Up
+                        {loading ? "Loading..." : "Sign Up"}
                     </button>
                 </form>
                 <p className="mt-6 text-center text-sm text-gray-600">
