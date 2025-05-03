@@ -27,7 +27,7 @@ const AppointmentBooking = () => {
         // prevent realoding the page
         e.preventDefault();
 
-        setLoading(true); // Set loading to true when submitting
+        setLoading(true); // Shows loading state
         setConfirmationMessage(''); // Reset confirmation message on new submission
 
         // API request (POST) to submit form data

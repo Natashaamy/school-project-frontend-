@@ -60,7 +60,7 @@ export default function Login() {
                     </div>
                     <button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading} 
                         className="w-full bg-blue-500 text-white py-2 rounded-full hover:bg-blue-600 transition duration-300"
                     >
                         {loading ? "Loading..." : "Login"}
